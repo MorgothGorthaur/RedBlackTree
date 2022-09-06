@@ -20,5 +20,6 @@ public class App {
         tree.add(17);
         tree.add(19);
         System.out.println(tree.toString());
+
     }
 }

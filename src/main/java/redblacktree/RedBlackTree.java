@@ -1,34 +1,36 @@
 package redblacktree;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class RedBlackTree {
     private Node node;
-
     public void add(int value) {
         recursiveAdd(node, value);
     }
 
-    private void recursiveAdd(Node curr, int value) {
+    private void recursiveAdd(Node curr, int key) {
         if (curr != null) {
-            if (curr.value < value) {
+            if (curr.key < key) {
                 if (curr.rightChild != null) {
-                    recursiveAdd(curr.rightChild, value);
+                    recursiveAdd(curr.rightChild, key);
                 } else {
-                    curr.rightChild = new Node(value, curr);
+                    curr.rightChild = new Node(key, curr);
                     checkRedBlackTreeConditions(curr);
                 }
-
             }
-            if (curr.value > value) {
+            if (curr.key > key) {
                 if (curr.leftChild != null) {
-                    recursiveAdd(curr.leftChild, value);
+                    recursiveAdd(curr.leftChild, key);
                 } else {
-                    curr.leftChild = new Node(value, curr);
+                    curr.leftChild = new Node(key, curr);
                     checkRedBlackTreeConditions(curr);
                 }
             }
-
         } else {
-            node = new Node(value, null);
+            node = new Node(key, null);
         }
     }
 
@@ -40,23 +42,22 @@ public class RedBlackTree {
     }
 
     private void leftTurn(Node curr) {
-        var tmp = new Node(curr.rightChild);
-        curr.swapParent(tmp);
+        var tmp = curr.rightChild;
+        tmp.parent = null;
+        curr.setParent(tmp);
         tmp.color = curr.color;
-        curr.color = curr.rightChild.color;
+        curr.color = Color.RED;
         curr.setRightChild(tmp.leftChild);
         tmp.setLeftChild(curr);
-
-
-
     }
 
 
     private void rightTurn(Node curr) {
-        var tmp = new Node(curr.leftChild);
-        curr.swapParent(tmp);
+        var tmp = curr.leftChild;
+        tmp.parent = null;
+        curr.setParent(tmp);
         tmp.color = curr.color;
-        curr.color = tmp.leftChild.color;
+        curr.color = Color.RED;
         curr.setLeftChild(tmp.rightChild);
         tmp.setRightChild(curr);
 
@@ -89,16 +90,35 @@ public class RedBlackTree {
 
     private StringBuilder getAllNodesAsString(Node curr) {
         var str = new StringBuilder();
-        str.append(" value " + curr.value);
+        str.append(" value " + curr.key);
         str.append(" color " + curr.color);
         if (curr.leftChild != null) {
-            str.append("\nparent node " + curr.value + " left ");
+            str.append("\nparent node " + curr.key + " left ");
             str.append(getAllNodesAsString(curr.leftChild));
         }
         if (curr.rightChild != null) {
-            str.append("\nparent node " + curr.value + " right ");
+            str.append("\nparent node " + curr.key + " right ");
             str.append(getAllNodesAsString(curr.rightChild));
         }
         return str;
+    }
+    private Node recursiveFind(Node curr, int key){
+        if(curr.key < key){
+            if(curr.rightChild != null){
+                return recursiveFind(curr.rightChild, key);
+            }
+            return null;
+        }
+        if(curr.key > key){
+            if(curr.leftChild != null){
+                return recursiveFind(curr.leftChild, key);
+            }
+            return null;
+        }
+        if(curr.key == key){
+
+            return curr;
+        }
+        return null;
     }
 }

@@ -4,50 +4,30 @@ class Node {
     Node parent;
     Node leftChild;
     Node rightChild;
-    int value;
+    int key;
     Color color;
-
     Node(int value, Node parent) {
-        this.value = value;
+        this.key = value;
         this.color = Color.RED;
         this.parent = parent;
     }
-
-    Node(Node another) {
-        this.value = another.value;
-        this.color = another.color;
-        if (another.rightChild != null) {
-            setRightChild(new Node(another.rightChild));
-        }
-        if (another.leftChild != null) {
-            setLeftChild(new Node(another.leftChild));
-        }
-    }
-
-
     boolean leftChildIsRed() {
         return leftChild != null && leftChild.color.equals(Color.RED);
     }
-
     boolean leftChildIsBlack() {
         return leftChild == null || leftChild.color.equals(Color.BLACK);
     }
-
     boolean rightChildIsRed() {
         return rightChild != null && rightChild.color.equals(Color.RED);
     }
-
     boolean isLeftChild() {
         return parent != null && parent.leftChild != null && parent.leftChild.equals(this);
     }
-
     boolean isRightChild() {
         return parent != null && parent.rightChild != null && parent.rightChild.equals(this);
     }
-
-    void swapParent(Node tmp) {
+    void setParent(Node tmp) {
         if (isRightChild()) {
-
             parent.setRightChild(tmp);
         }
         if (isLeftChild()) {
@@ -57,11 +37,7 @@ class Node {
             tmp.parent = null;
             parent = tmp;
         }
-
-        //parent = tmp;
-
     }
-
     void setLeftChild(Node left) {
         if (left != null) {
             leftChild = left;
@@ -70,7 +46,6 @@ class Node {
             leftChild = null;
         }
     }
-
     void setRightChild(Node right) {
         if (right != null) {
             rightChild = right;
@@ -78,7 +53,5 @@ class Node {
         } else {
             rightChild = null;
         }
-
     }
-
 }
