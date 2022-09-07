@@ -91,4 +91,10 @@ class Node {
     public boolean rightChildIsBlack() {
         return rightChild == null || rightChild.color.equals(Color.BLACK);
     }
+    public Node toFinal(){
+        if(parent != null){
+            return parent.toFinal();
+        }
+        return this;
+    }
 }
