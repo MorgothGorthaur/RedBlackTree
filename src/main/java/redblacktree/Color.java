@@ -2,6 +2,5 @@ package redblacktree;
 
 public enum Color {
     BLACK,
-    RED,
-    NILL
+    RED
 }

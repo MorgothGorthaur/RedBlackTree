@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RedBlackTree {
     private Node node;
-    public void add(int value) {
-        recursiveAdd(node, value);
+
+    public void add(int key) {
+        recursiveAdd(node, key);
+
     }
 
     private void recursiveAdd(Node curr, int key) {
@@ -51,7 +53,6 @@ public class RedBlackTree {
         tmp.setLeftChild(curr);
     }
 
-
     private void rightTurn(Node curr) {
         var tmp = curr.leftChild;
         tmp.parent = null;
@@ -63,13 +64,12 @@ public class RedBlackTree {
 
     }
 
-
     public String toString() {
         return getAllNodesAsString(node).toString();
     }
 
     private void checkRedBlackTreeConditions(Node curr) {
-        if (curr.rightChildIsRed() && curr.leftChildIsRed()) {
+        if (curr.rightChildIsRed() && curr.leftChildIsRed() ) {
             swapColors(curr);
         }
         if (curr.leftChildIsBlack() && curr.rightChildIsRed()) {
@@ -85,7 +85,6 @@ public class RedBlackTree {
             node = curr;
 
         }
-
     }
 
     private StringBuilder getAllNodesAsString(Node curr) {
@@ -102,23 +101,114 @@ public class RedBlackTree {
         }
         return str;
     }
-    private Node recursiveFind(Node curr, int key){
-        if(curr.key < key){
-            if(curr.rightChild != null){
+
+    private Node recursiveFind(Node curr, int key) {
+        if (curr.key < key) {
+            if (curr.rightChild != null) {
                 return recursiveFind(curr.rightChild, key);
             }
             return null;
         }
-        if(curr.key > key){
-            if(curr.leftChild != null){
+        if (curr.key > key) {
+            if (curr.leftChild != null) {
                 return recursiveFind(curr.leftChild, key);
             }
             return null;
         }
-        if(curr.key == key){
+        if (curr.key == key) {
 
             return curr;
         }
         return null;
     }
+
+    public Integer delete(int key) {
+        var deleted = recursiveFind(node, key);
+        if(deleted != null) {
+           deleteNode(deleted);
+           return deleted.key;
+        }
+        return null;
+    }
+    public void deleteNode(Node deleted){
+        if (deleted.haveNoChild()) {
+            if(deleted.color.equals(Color.BLACK)){
+                balancingAfterDelete(deleted.getBrother());
+            }
+            deleted.delete();
+        }
+        if (deleted.haveOneOrTwoChild()) {
+            convertToNodeWithoutChild(deleted);
+        }
+    }
+    private void convertToNodeWithoutChild(Node deleted){
+        var min = getMinNode(deleted.rightChild);
+        var max = getMaxNode(deleted.leftChild);
+        if(min != null){
+            deleted.swap(min);
+            deleteNode(min);
+
+        } else {
+            deleted.swap(max);
+            deleteNode(max);
+        }
+    }
+    private Node getMinNode(Node curr) {
+        if (curr != null &&curr.leftChild != null) {
+            return getMinNode(curr.leftChild);
+        }
+        return curr;
+
+    }
+    private Node getMaxNode(Node curr) {
+        if (curr != null && curr.rightChild != null) {
+            return getMaxNode(curr.rightChild);
+        }
+        return curr;
+    }
+    private void balancingAfterDelete(Node brother){
+        if(brother.color.equals(Color.BLACK)) {
+            if(brother.isLeftChild()){
+                balancingNodeAfterDeleteWithLeftBrother(brother);
+            } else {
+                balancingNodeAfterDeleteWithRightBrother(brother);
+            }
+        } else {
+            if(brother.isRightChild()){
+                leftTurn(brother.parent);
+                balancingAfterDelete(brother.leftChild.rightChild);
+            } else {
+                rightTurn(brother.parent);
+                balancingAfterDelete(brother.rightChild.leftChild);
+            }
+        }
+    }
+    private void balancingNodeAfterDeleteWithLeftBrother(Node leftBrother){
+        if(leftBrother.leftChildIsRed()){
+            rightTurn(leftBrother.parent);
+            leftBrother.leftChild.color = Color.BLACK;
+            leftBrother.rightChild.color = Color.BLACK;
+        }else if(leftBrother.leftChildIsBlack() && leftBrother.rightChildIsBlack()){
+            balancingNodeAfterDeleteWhisBlackChildsBrother(leftBrother);
+        }
+    }
+    private void balancingNodeAfterDeleteWithRightBrother(Node rightBrother){
+        if(rightBrother.leftChildIsRed()){
+            rightTurn(rightBrother);
+            leftTurn(rightBrother.parent.parent);
+            rightBrother.color = Color.BLACK;
+            rightBrother.getBrother().color = Color.BLACK;
+        }else if(rightBrother.leftChildIsBlack() && rightBrother.rightChildIsBlack()){
+            balancingNodeAfterDeleteWhisBlackChildsBrother(rightBrother);
+        }
+    }
+    private void balancingNodeAfterDeleteWhisBlackChildsBrother(Node brother){
+        brother.color = Color.RED;
+        if(brother.parent.color.equals(Color.RED)){
+            brother.parent.color = Color.BLACK;
+        } else {
+            balancingAfterDelete(brother.parent.getBrother());
+        }
+    }
+
 }
