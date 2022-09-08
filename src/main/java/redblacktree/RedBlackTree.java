@@ -221,14 +221,18 @@ public class RedBlackTree {
     }
 
     RedBlackTree tailMap(int key){
-        var elem = recursiveFind(node,key);
         RedBlackTree tree = new RedBlackTree();
+        split(key,tree);
+        var elem = recursiveFind(node,key);
+
         splitLeft(elem, tree);
         return tree;
     }
     RedBlackTree headMap(int key){
-        var elem = recursiveFind(node,key);
+
         RedBlackTree tree = new RedBlackTree();
+        split(key,tree);
+        var elem = recursiveFind(node,key);
         splitLeft(elem, tree);
         var tmp = node;
         node = tree.node;
@@ -240,8 +244,10 @@ public class RedBlackTree {
     }
 
     RedBlackTree subMap(int firstKey, int secondKey){
-        var elem = recursiveFind(node,firstKey);
+
         RedBlackTree tree = new RedBlackTree();
+        split(firstKey,tree);
+        var elem = recursiveFind(node,firstKey);
         splitLeft(elem, tree);
         var subTree = tree.headMap(secondKey);
         concate(tree);
@@ -261,15 +267,19 @@ public class RedBlackTree {
             deleteNode(splitNode.leftChild);
 
         }
-        if(splitNode.isRightChild()){
-            tree.add(splitNode.parent.key);
-            deleteNode(splitNode.parent);
-        }
-        if(splitNode.leftChild == null && splitNode.rightChild == null && splitNode.isLeftChild()){
+
+        if(splitNode.leftChild == null && splitNode.rightChild == null){
             tree.add(splitNode.key);
             deleteNode(splitNode);
         }else {
             splitLeft(splitNode, tree);
+        }
+    }
+    private void split(int key, RedBlackTree tree){
+        if(node.key < key){
+            tree.add(node.key);
+            deleteNode(node);
+            split(key,tree);
         }
     }
 
