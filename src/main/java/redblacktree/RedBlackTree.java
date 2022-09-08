@@ -221,37 +221,45 @@ public class RedBlackTree {
     }
 
     RedBlackTree tailMap(int key){
-        RedBlackTree tree = new RedBlackTree();
-        split(key,tree);
-        var elem = recursiveFind(node,key);
 
-        splitLeft(elem, tree);
-        return tree;
+        if( recursiveFind(node, key) != null) {
+            RedBlackTree tree = new RedBlackTree();
+            split(key, tree);
+            var elem = recursiveFind(node,key);
+            splitLeft(elem, tree);
+            return tree;
+        }
+        return null;
     }
     RedBlackTree headMap(int key){
 
-        RedBlackTree tree = new RedBlackTree();
-        split(key,tree);
-        var elem = recursiveFind(node,key);
-        splitLeft(elem, tree);
-        var tmp = node;
-        node = tree.node;
-        tree.node = tmp;
-        elem = recursiveFind(node,key);
-        tree.add(elem.key);
-        deleteNode(elem);
-        return tree;
+        if( recursiveFind(node, key) != null) {
+            RedBlackTree tree = new RedBlackTree();
+            split(key, tree);
+            var elem = recursiveFind(node, key);
+            splitLeft(elem, tree);
+            var tmp = node;
+            node = tree.node;
+            tree.node = tmp;
+            elem = recursiveFind(node, key);
+            tree.add(elem.key);
+            deleteNode(elem);
+            return tree;
+        }
+        return null;
     }
 
     RedBlackTree subMap(int firstKey, int secondKey){
-
-        RedBlackTree tree = new RedBlackTree();
-        split(firstKey,tree);
-        var elem = recursiveFind(node,firstKey);
-        splitLeft(elem, tree);
-        var subTree = tree.headMap(secondKey);
-        concate(tree);
-        return subTree;
+        if(recursiveFind(node, firstKey) != null && recursiveFind(node, secondKey) != null && firstKey >= secondKey) {
+            RedBlackTree tree = new RedBlackTree();
+            split(firstKey, tree);
+            var elem = recursiveFind(node, firstKey);
+            splitLeft(elem, tree);
+            var subTree = tree.headMap(secondKey);
+            concate(tree);
+            return subTree;
+        }
+        return null;
     }
     private void concate(RedBlackTree tree){
         if(tree.node != null) {

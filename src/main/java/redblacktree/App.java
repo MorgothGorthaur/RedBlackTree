@@ -39,7 +39,7 @@ public class App {
 //        tree.delete(20);
 //        tree.delete(4);
 //        tree.delete(25);
-          System.out.println(tree.subMap(30,30));
+          System.out.println(tree.subMap(16,15));
         System.out.println(tree.toString());
     }
 }
