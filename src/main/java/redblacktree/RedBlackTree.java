@@ -35,12 +35,6 @@ public class RedBlackTree {
         }
     }
 
-    private void swapColors(Node curr) {
-        curr.color = Color.RED;
-        curr.rightChild.color = Color.BLACK;
-        curr.leftChild.color = Color.BLACK;
-
-    }
     private void leftTurn(Node curr) {
         var tmp = curr.rightChild;
         tmp.parent = null;
@@ -70,7 +64,7 @@ public class RedBlackTree {
     }
     private void checkRedBlackTreeConditions(Node curr) {
         if (curr.rightChildIsRed() && curr.leftChildIsRed()) {
-            swapColors(curr);
+            curr.setColorAsRedAndChildsColorAsBlack();
         }
         if (curr.leftChildIsBlack() && curr.rightChildIsRed()) {
             leftTurn(curr);
@@ -119,7 +113,6 @@ public class RedBlackTree {
         }
         return null;
     }
-
     public Integer delete(int key) {
         var deleted = recursiveFind(node, key);
         if (deleted != null) {
@@ -128,7 +121,7 @@ public class RedBlackTree {
         }
         return null;
     }
-    public void deleteNode(Node deleted) {
+    private void deleteNode(Node deleted) {
         if (deleted.haveNoChild()) {
             if (deleted.color.equals(Color.BLACK) && deleted.parent != null) {
                 balancingAfterDelete(deleted.getBrother());
@@ -146,11 +139,10 @@ public class RedBlackTree {
         var min = getMinNode(deleted.rightChild);
         var max = getMaxNode(deleted.leftChild);
         if (min != null) {
-            deleted.swap(min);
+            deleted.swapKeys(min);
             deleteNode(min);
-
         } else {
-            deleted.swap(max);
+            deleted.swapKeys(max);
             deleteNode(max);
         }
     }
@@ -161,14 +153,12 @@ public class RedBlackTree {
         return curr;
 
     }
-
     private Node getMaxNode(Node curr) {
         if (curr != null && curr.rightChild != null) {
             return getMaxNode(curr.rightChild);
         }
         return curr;
     }
-
     private void balancingAfterDelete(Node brother) {
         if (brother.color.equals(Color.BLACK)) {
             if (brother.isLeftChild()) {
@@ -212,10 +202,8 @@ public class RedBlackTree {
         brother.color = Color.RED;
         if (brother.parent.color.equals(Color.RED)) {
             brother.parent.color = Color.BLACK;
-        } else {
-            if (brother.parent.parent != null) {
+        } else if (brother.parent.parent != null) {
                 balancingAfterDelete(brother.parent.getBrother());
-            }
         }
         if (brother.isRightChild()) {
             leftTurn(brother.parent);
