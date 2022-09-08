@@ -109,4 +109,15 @@ class Node {
         key = max.key;
         max.key = tmp;
     }
+
+    int getBlackHeight(){
+       var height = 0;
+       if(color.equals(Color.BLACK)){
+           height += 1;
+       }
+       if(leftChild != null){
+           height += leftChild.getBlackHeight();
+       }
+       return height;
+    }
 }

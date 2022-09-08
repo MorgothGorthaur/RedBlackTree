@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RedBlackTree {
-    private Node node;
+    Node node;
 
     public void add(int key) {
         recursiveAdd(node, key);
@@ -63,12 +63,14 @@ public class RedBlackTree {
 
     }
     private void checkRedBlackTreeConditions(Node curr) {
+
         if (curr.rightChildIsRed() && curr.leftChildIsRed()) {
             curr.setColorAsRedAndChildsColorAsBlack();
         }
         if (curr.leftChildIsBlack() && curr.rightChildIsRed()) {
             leftTurn(curr);
         }
+        //only black node can have red childs
         if (curr.leftChildIsRed() && curr.leftChild.leftChildIsRed()) {
             rightTurn(curr);
         }
@@ -205,8 +207,69 @@ public class RedBlackTree {
         } else if (brother.parent.parent != null) {
                 balancingAfterDelete(brother.parent.getBrother());
         }
+        //right brother must be always black!
         if (brother.isRightChild()) {
             leftTurn(brother.parent);
+        }
+    }
+
+    public Integer getTreeHeigh(){
+        if(node != null){
+            return node.getBlackHeight();
+        }
+        return null;
+    }
+
+    RedBlackTree tailMap(int key){
+        var elem = recursiveFind(node,key);
+        RedBlackTree tree = new RedBlackTree();
+        splitLeft(elem, tree);
+        return tree;
+    }
+    RedBlackTree headMap(int key){
+        var elem = recursiveFind(node,key);
+        RedBlackTree tree = new RedBlackTree();
+        splitLeft(elem, tree);
+        var tmp = node;
+        node = tree.node;
+        tree.node = tmp;
+        elem = recursiveFind(node,key);
+        tree.add(elem.key);
+        deleteNode(elem);
+        return tree;
+    }
+
+    RedBlackTree subMap(int firstKey, int secondKey){
+        var elem = recursiveFind(node,firstKey);
+        RedBlackTree tree = new RedBlackTree();
+        splitLeft(elem, tree);
+        var subTree = tree.headMap(secondKey);
+        concate(tree);
+        return subTree;
+    }
+    private void concate(RedBlackTree tree){
+        if(tree.node != null) {
+            add(tree.node.key);
+            tree.delete(tree.node.key);
+            concate(tree);
+        }
+    }
+
+    private void splitLeft(Node splitNode, RedBlackTree tree){
+        if(splitNode.leftChild != null){
+            tree.add(splitNode.leftChild.key);
+            deleteNode(splitNode.leftChild);
+
+        }
+        if(splitNode.isRightChild()){
+            tree.add(splitNode.parent.key);
+            deleteNode(splitNode.parent);
+        }
+        if(splitNode.leftChild == null && splitNode.rightChild == null && splitNode.isLeftChild()){
+            tree.add(splitNode.key);
+            deleteNode(splitNode);
+        }else {
+            splitLeft(splitNode, tree);
         }
     }
 
