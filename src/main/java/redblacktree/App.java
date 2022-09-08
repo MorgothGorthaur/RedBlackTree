@@ -24,6 +24,9 @@ public class App {
         System.out.println(tree.toString());
         System.out.println(tree.getTreeHeigh());
         System.out.println(tree.delete(30));
+        System.out.println(tree.get(15));
+        System.out.println(tree.firstKey());
+        System.out.println(tree.lastKey());
 //        tree.delete(5);
 //        tree.delete(15);
 //        tree.delete(11);

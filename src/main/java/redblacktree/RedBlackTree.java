@@ -295,5 +295,20 @@ public class RedBlackTree <V> {
             split(key,tree);
         }
     }
+    public V get(int key){
+        var finded = recursiveFind(node, key);
+        if(finded != null){
+            return finded.value;
+        }
+        return null;
+    }
+    public Integer firstKey(){
+        var first = getMaxNode(node);
+        return first.key;
+    }
+    public Integer lastKey(){
+        var last = getMinNode(node);
+        return last.key;
+    }
 
 }
