@@ -1,41 +1,45 @@
 package redblacktree;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
-public class RedBlackTree {
-    Node node;
+public class RedBlackTree <V> {
+    Node <V> node;
+    public RedBlackTree (){
 
-    public void add(int key) {
-        recursiveAdd(node, key);
     }
-    private void recursiveAdd(Node curr, int key) {
+    public RedBlackTree  (Node <V> node){
+        this.node = node;
+    }
+    public void add(int key, V value) {
+        recursiveAdd(node, key, value);
+    }
+    private void recursiveAdd(Node <V> curr, int key, V value) {
         if (curr != null) {
             if (curr.key < key) {
                 if (curr.rightChild != null) {
-                    recursiveAdd(curr.rightChild, key);
+                    recursiveAdd(curr.rightChild, key, value);
                 } else {
-                    curr.rightChild = new Node(key, curr);
+                    curr.rightChild = new Node <V>(key, value, curr);
                     checkRedBlackTreeConditions(curr);
                 }
             }
             if (curr.key > key) {
                 if (curr.leftChild != null) {
-                    recursiveAdd(curr.leftChild, key);
+                    recursiveAdd(curr.leftChild, key, value);
                 } else {
-                    curr.leftChild = new Node(key, curr);
+                    curr.leftChild = new Node<>(key, value, curr);
                     checkRedBlackTreeConditions(curr);
                 }
             }
+            if(curr.key == key){
+                curr.value = value;
+            }
         } else {
-            node = new Node(key, null);
+            node = new Node<>(key, value,null);
             checkRedBlackTreeConditions(node);
         }
     }
 
-    private void leftTurn(Node curr) {
+    private void leftTurn(Node<V> curr) {
         var tmp = curr.rightChild;
         tmp.parent = null;
         curr.setParent(tmp);
@@ -45,7 +49,7 @@ public class RedBlackTree {
         tmp.setLeftChild(curr);
         node = node.toFinal();
     }
-    private void rightTurn(Node curr) {
+    private void rightTurn(Node <V> curr) {
         var tmp = curr.leftChild;
         tmp.parent = null;
         curr.setParent(tmp);
@@ -62,7 +66,7 @@ public class RedBlackTree {
         return null;
 
     }
-    private void checkRedBlackTreeConditions(Node curr) {
+    private void checkRedBlackTreeConditions(Node <V> curr) {
 
         if (curr.rightChildIsRed() && curr.leftChildIsRed()) {
             curr.setColorAsRedAndChildsColorAsBlack();
@@ -82,7 +86,7 @@ public class RedBlackTree {
 
         }
     }
-    private StringBuilder getAllNodesAsString(Node curr) {
+    private StringBuilder getAllNodesAsString(Node<V> curr) {
         var str = new StringBuilder();
         str.append(" value " + curr.key);
         str.append(" color " + curr.color);
@@ -96,7 +100,7 @@ public class RedBlackTree {
         }
         return str;
     }
-    private Node recursiveFind(Node curr, int key) {
+    private Node <V> recursiveFind(Node<V> curr, int key) {
         if (curr.key < key) {
             if (curr.rightChild != null) {
                 return recursiveFind(curr.rightChild, key);
@@ -115,15 +119,16 @@ public class RedBlackTree {
         }
         return null;
     }
-    public Integer delete(int key) {
+    public V delete(int key) {
         var deleted = recursiveFind(node, key);
+        var value = deleted.value;
         if (deleted != null) {
             deleteNode(deleted);
-            return deleted.key;
+            return value;
         }
         return null;
     }
-    private void deleteNode(Node deleted) {
+    private void deleteNode(Node <V> deleted) {
         if (deleted.haveNoChild()) {
             if (deleted.color.equals(Color.BLACK) && deleted.parent != null) {
                 balancingAfterDelete(deleted.getBrother());
@@ -137,31 +142,31 @@ public class RedBlackTree {
             convertToNodeWithoutChild(deleted);
         }
     }
-    private void convertToNodeWithoutChild(Node deleted) {
+    private void convertToNodeWithoutChild(Node<V> deleted) {
         var min = getMinNode(deleted.rightChild);
         var max = getMaxNode(deleted.leftChild);
         if (min != null) {
-            deleted.swapKeys(min);
+            deleted.swapKeysAndValues(min);
             deleteNode(min);
         } else {
-            deleted.swapKeys(max);
+            deleted.swapKeysAndValues(max);
             deleteNode(max);
         }
     }
-    private Node getMinNode(Node curr) {
+    private Node <V>  getMinNode(Node<V> curr) {
         if (curr != null && curr.leftChild != null) {
             return getMinNode(curr.leftChild);
         }
         return curr;
 
     }
-    private Node getMaxNode(Node curr) {
+    private Node <V> getMaxNode(Node<V> curr) {
         if (curr != null && curr.rightChild != null) {
             return getMaxNode(curr.rightChild);
         }
         return curr;
     }
-    private void balancingAfterDelete(Node brother) {
+    private void balancingAfterDelete(Node <V> brother) {
         if (brother.color.equals(Color.BLACK)) {
             if (brother.isLeftChild()) {
                 balancingNodeAfterDeleteWithLeftBrother(brother);
@@ -179,7 +184,7 @@ public class RedBlackTree {
         }
     }
 
-    private void balancingNodeAfterDeleteWithLeftBrother(Node leftBrother) {
+    private void balancingNodeAfterDeleteWithLeftBrother(Node<V> leftBrother) {
         if (leftBrother.leftChildIsRed()) {
             rightTurn(leftBrother.parent);
             leftBrother.leftChild.color = Color.BLACK;
@@ -189,7 +194,7 @@ public class RedBlackTree {
         }
     }
 
-    private void balancingNodeAfterDeleteWithRightBrother(Node rightBrother) {
+    private void balancingNodeAfterDeleteWithRightBrother(Node<V> rightBrother) {
         if (rightBrother.leftChildIsRed()) {
             rightTurn(rightBrother);
             leftTurn(rightBrother.parent.parent);
@@ -200,7 +205,7 @@ public class RedBlackTree {
         }
     }
 
-    private void balancingNodeAfterDeleteWithBlackChildsBrother(Node brother) {
+    private void balancingNodeAfterDeleteWithBlackChildsBrother(Node<V> brother) {
         brother.color = Color.RED;
         if (brother.parent.color.equals(Color.RED)) {
             brother.parent.color = Color.BLACK;
@@ -220,10 +225,10 @@ public class RedBlackTree {
         return null;
     }
 
-    RedBlackTree tailMap(int key){
+    RedBlackTree<V> tailMap(int key){
 
         if( recursiveFind(node, key) != null) {
-            RedBlackTree tree = new RedBlackTree();
+            var tree = new RedBlackTree<V>();
             split(key, tree);
             var elem = recursiveFind(node,key);
             splitLeft(elem, tree);
@@ -231,10 +236,10 @@ public class RedBlackTree {
         }
         return null;
     }
-    RedBlackTree headMap(int key){
+    RedBlackTree<V> headMap(int key){
 
         if( recursiveFind(node, key) != null) {
-            RedBlackTree tree = new RedBlackTree();
+            var tree = new RedBlackTree<V>();
             split(key, tree);
             var elem = recursiveFind(node, key);
             splitLeft(elem, tree);
@@ -242,50 +247,50 @@ public class RedBlackTree {
             node = tree.node;
             tree.node = tmp;
             elem = recursiveFind(node, key);
-            tree.add(elem.key);
+            tree.add(elem.key, elem.value);
             deleteNode(elem);
             return tree;
         }
         return null;
     }
 
-    RedBlackTree subMap(int firstKey, int secondKey){
+    RedBlackTree<V> subMap(int firstKey, int secondKey){
         if(recursiveFind(node, firstKey) != null && recursiveFind(node, secondKey) != null && firstKey >= secondKey) {
-            RedBlackTree tree = new RedBlackTree();
+            var tree = new RedBlackTree <V> ();
             split(firstKey, tree);
             var elem = recursiveFind(node, firstKey);
             splitLeft(elem, tree);
-            var subTree = tree.headMap(secondKey);
+            RedBlackTree<V> subTree = tree.headMap(secondKey);
             concate(tree);
             return subTree;
         }
         return null;
     }
-    private void concate(RedBlackTree tree){
+    private void concate(RedBlackTree<V> tree){
         if(tree.node != null) {
-            add(tree.node.key);
+            add(tree.node.key, tree.node.value);
             tree.delete(tree.node.key);
             concate(tree);
         }
     }
 
-    private void splitLeft(Node splitNode, RedBlackTree tree){
+    private void splitLeft(Node <V> splitNode, RedBlackTree<V> tree){
         if(splitNode.leftChild != null){
-            tree.add(splitNode.leftChild.key);
+            tree.add(splitNode.leftChild.key, splitNode.leftChild.value);
             deleteNode(splitNode.leftChild);
 
         }
 
         if(splitNode.leftChild == null && splitNode.rightChild == null){
-            tree.add(splitNode.key);
+            tree.add(splitNode.key, splitNode.value);
             deleteNode(splitNode);
         }else {
             splitLeft(splitNode, tree);
         }
     }
-    private void split(int key, RedBlackTree tree){
+    private void split(int key, RedBlackTree<V> tree){
         if(node.key < key){
-            tree.add(node.key);
+            tree.add(node.key, node.value);
             deleteNode(node);
             split(key,tree);
         }

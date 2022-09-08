@@ -1,26 +1,28 @@
 package redblacktree;
 
-class Node {
-    Node parent;
-    Node leftChild;
-    Node rightChild;
+class Node <V> {
+    Node<V> parent;
+    Node<V> leftChild;
+    Node<V> rightChild;
     int key;
+    V value;
     Color color;
 
-    Node(int value, Node parent) {
-        this.key = value;
+    Node(int key, V value, Node<V> parent) {
+        this.key = key;
+        this.value = value;
         this.color = Color.RED;
         this.parent = parent;
     }
 
-    Node getBrother() {
+    Node<V> getBrother() {
         if (isLeftChild()) {
             return parent.rightChild;
         }
         return parent.leftChild;
     }
 
-    Node toFinal() {
+    Node<V> toFinal() {
         if (parent != null) {
             return parent.toFinal();
         }
@@ -59,7 +61,7 @@ class Node {
         return leftChild == null && rightChild == null;
     }
 
-    void setParent(Node tmp) {
+    void setParent(Node<V> tmp) {
         if (isRightChild()) {
             parent.setRightChild(tmp);
         }
@@ -72,7 +74,7 @@ class Node {
         }
     }
 
-    void setLeftChild(Node left) {
+    void setLeftChild(Node<V> left) {
         if (left != null) {
             leftChild = left;
             left.parent = this;
@@ -81,7 +83,7 @@ class Node {
         }
     }
 
-    void setRightChild(Node right) {
+    void setRightChild(Node<V> right) {
         if (right != null) {
             rightChild = right;
             right.parent = this;
@@ -104,10 +106,13 @@ class Node {
         parent = null;
     }
 
-    void swapKeys(Node max) {
-        var tmp = key;
+    void swapKeysAndValues(Node<V> max) {
+        var tmpKey = key;
+        var tmpValue = value;
         key = max.key;
-        max.key = tmp;
+        value =  max.value;
+        max.key = tmpKey;
+        max.value = tmpValue;
     }
 
     int getBlackHeight(){
