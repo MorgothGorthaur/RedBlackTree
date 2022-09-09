@@ -1,5 +1,7 @@
 package redblacktree;
 
+import java.util.TreeMap;
+
 public class App {
     public static void main(String[] args){
        var tree = new RedBlackTree <String> ();
@@ -23,10 +25,7 @@ public class App {
 
         System.out.println(tree.toString());
         System.out.println(tree.getTreeHeigh());
-        System.out.println(tree.delete(30));
-        System.out.println(tree.get(15));
-        System.out.println(tree.firstKey());
-        System.out.println(tree.lastKey());
+        System.out.println(tree.subMap(23, 10));
 //        tree.delete(5);
 //        tree.delete(15);
 //        tree.delete(11);
@@ -43,6 +42,7 @@ public class App {
 //        tree.delete(4);
 //        tree.delete(25);
    //     System.out.println(tree.headMap(16));
-        System.out.println(tree.toString());
+       System.out.println(tree.toString());
+
     }
 }
