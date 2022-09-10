@@ -24,7 +24,7 @@ public class App {
 
         System.out.println(tree.toString());
         System.out.println(tree.getTreeHeigh());
-        System.out.println(tree.headMap(23, true));
+        System.out.println(tree.subMap(23, false ,14, false));
 //        tree.delete(5);
 //        tree.delete(15);
 //        tree.delete(11);
