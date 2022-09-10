@@ -4,22 +4,22 @@ package redblacktree;
 public class App {
     public static void main(String[] args){
        var tree = new RedBlackTree <String> ();
-        tree.add(20, "20");
-        tree.add(25,"25");
-        tree.add(23, "23");
-        tree.add(30,"30");
-        tree.add(10, "10");
-        tree.add(4, "4");
-        tree.add(2, "2");
-        tree.add(5, "5");
-        tree.add(3, "3");
-        tree.add(16, "16");
-        tree.add(14, "14");
-        tree.add(12, "12");
-        tree.add(15, "15");
-        tree.add(11, "11");
-        tree.add(17, "17");
-        tree.add(19, "19");
+        tree.put(20, "20");
+        tree.put(25,"25");
+        tree.put(23, "23");
+        tree.put(30,"30");
+        tree.put(10, "10");
+        tree.put(4, "4");
+        tree.put(2, "2");
+        tree.put(5, "5");
+        tree.put(3, "3");
+        tree.put(16, "16");
+        tree.put(14, "14");
+        tree.put(12, "12");
+        tree.put(15, "15");
+        tree.put(11, "11");
+        tree.put(17, "17");
+        tree.put(19, "19");
 
 
         System.out.println(tree.toString());

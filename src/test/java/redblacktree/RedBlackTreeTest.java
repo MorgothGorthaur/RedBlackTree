@@ -12,7 +12,7 @@ public class RedBlackTreeTest {
     @Test
     void getShouldReturnValue_ifFound() {
         //given
-        tree.add(1, "abracadabra");
+        tree.put(1, "abracadabra");
         //when
         var res = tree.get(1);
         //then
@@ -30,7 +30,7 @@ public class RedBlackTreeTest {
     @Test
     void deleteShouldReturnNull_ifNotFound() {
         //when
-        var res = tree.delete(1);
+        var res = tree.remove(1);
         //then
         assertNull(res);
     }
@@ -38,9 +38,9 @@ public class RedBlackTreeTest {
     @Test
     void deleteShouldReturnValue_ifFound() {
         //given
-        tree.add(1, "abra");
+        tree.put(1, "abra");
         //when
-        var res = tree.delete(1);
+        var res = tree.remove(1);
         //then
         assertEquals(res, "abra");
         assertNull(tree.get(1));
@@ -57,11 +57,11 @@ public class RedBlackTreeTest {
     @Test
     void firstKeyShouldReturnMaxKeyValue_ifTreeSizeMoreZero() {
         //given
-        tree.add(20, "20");
-        tree.add(25, "25");
-        tree.add(23, "23");
-        tree.add(30, "30");
-        tree.add(10, "10");
+        tree.put(20, "20");
+        tree.put(25, "25");
+        tree.put(23, "23");
+        tree.put(30, "30");
+        tree.put(10, "10");
         //when
         var res = tree.firstKey();
         //then
@@ -79,7 +79,7 @@ public class RedBlackTreeTest {
     @Test
     void lastKeyShouldReturnMinKeyValue_ifTreeSizeMoreZero() {
         //given
-        tree.add(1, "abra");
+        tree.put(1, "abra");
         //when
         var res = tree.lastKey();
         //then
@@ -98,20 +98,19 @@ public class RedBlackTreeTest {
     @Test
     void tailMapShouldReturnNewTreeWithKeysLessThenKey_ifKeyFound(){
         //given
-        tree.add(16, "16");
-        tree.add(14, "14");
-        tree.add(12, "12");
-        tree.add(15, "15");
-        tree.add(11, "11");
-        tree.add(17, "17");
-        tree.add(19, "19");
+        tree.put(16, "16");
+        tree.put(14, "14");
+        tree.put(12, "12");
+        tree.put(15, "15");
+        tree.put(11, "11");
+        tree.put(17, "17");
+        tree.put(19, "19");
         //when
         var res = tree.tailMap(16);
         assertEquals(res.get(16), "16");
-        assertEquals(res.get(15), "15");
-        assertEquals(res.get(14), "14");
-        assertEquals(res.get(12), "12");
-        assertEquals(res.get(11), "11");
+        assertEquals(res.get(17), "17");
+        assertEquals(res.get(19), "19");
+
     }
     @Test
     @Disabled
@@ -124,19 +123,21 @@ public class RedBlackTreeTest {
     @Test
     void headMapShouldReturnKeysMoreThenKey_ifFound(){
         //given
-        tree.add(16, "16");
-        tree.add(14, "14");
-        tree.add(12, "12");
-        tree.add(15, "15");
-        tree.add(11, "11");
-        tree.add(17, "17");
-        tree.add(19, "19");
+        tree.put(16, "16");
+        tree.put(14, "14");
+        tree.put(12, "12");
+        tree.put(15, "15");
+        tree.put(11, "11");
+        tree.put(17, "17");
+        tree.put(19, "19");
         //when
         var res = tree.headMap(16);
         //then
         assertEquals(res.get(16), "16");
-        assertEquals(res.get(17), "17");
-        assertEquals(res.get(19), "19");
+        assertEquals(res.get(15), "15");
+        assertEquals(res.get(14), "14");
+        assertEquals(res.get(12), "12");
+        assertEquals(res.get(11), "11");
     }
 
     @Test
@@ -150,13 +151,13 @@ public class RedBlackTreeTest {
     @Test
     void subMapShouldReturnTreeMapWithKeysBetweenFirstKeyAndSecondKey(){
         //given
-        tree.add(16, "16");
-        tree.add(14, "14");
-        tree.add(12, "12");
-        tree.add(15, "15");
-        tree.add(11, "11");
-        tree.add(17, "17");
-        tree.add(19, "19");
+        tree.put(16, "16");
+        tree.put(14, "14");
+        tree.put(12, "12");
+        tree.put(15, "15");
+        tree.put(11, "11");
+        tree.put(17, "17");
+        tree.put(19, "19");
         //when
         var res = tree.subMap(14,16);
         //then
@@ -175,7 +176,7 @@ public class RedBlackTreeTest {
     @Test
     void firstEntryShouldReturnEntryWithMaxKey_ifTreeSizeMoreZero(){
         //given
-        tree.add(15,"d");
+        tree.put(15,"d");
         //when
         var res = tree.firstEntry();
         //then
@@ -193,7 +194,7 @@ public class RedBlackTreeTest {
     @Test
     void lastEntryShouldReturnEntryWithMinKey_ifTreeSizeMoreZero(){
         //given
-        tree.add(15,"d");
+        tree.put(15,"d");
         //when
         var res = tree.lastEntry();
         //then
@@ -210,7 +211,7 @@ public class RedBlackTreeTest {
     @Test
     void pollFirstShouldReturnAndRemoveEntryWithMaxKey_ifTreeSizeMoreZero(){
         //given
-        tree.add(16,"dd");
+        tree.put(16,"dd");
         //when
         var res = tree.pollFirst();
         //given
@@ -221,7 +222,7 @@ public class RedBlackTreeTest {
     @Test
     void pollLastShouldReturnAndRemoveEntryWithMinKey_ifTreeSizeMoreZero(){
         //given
-        tree.add(16,"dd");
+        tree.put(16,"dd");
         //when
         var res = tree.pollLast();
         //given
@@ -240,9 +241,9 @@ public class RedBlackTreeTest {
     @Test
     void ceilingEntryShouldReturnEntryWithEqualKey_ifFound(){
         //given
-        tree.add(4,"4");
-        tree.add(5,"5");
-        tree.add(8,"8");
+        tree.put(4,"4");
+        tree.put(5,"5");
+        tree.put(8,"8");
 
         //when
         var res = tree.ceilingEntry(5);
@@ -253,9 +254,9 @@ public class RedBlackTreeTest {
     @Test
     void ceilingEntryShouldReturnEntryWithBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys(){
         //given
-        tree.add(4,"4");
-        tree.add(5,"5");
-        tree.add(8,"8");
+        tree.put(4,"4");
+        tree.put(5,"5");
+        tree.put(8,"8");
 
         //when
         var res = tree.ceilingEntry(6);
@@ -274,9 +275,9 @@ public class RedBlackTreeTest {
     @Test
     void ceilingKeyShouldReturnKeyWithEqualKey_ifFound(){
         //given
-        tree.add(4,"4");
-        tree.add(5,"5");
-        tree.add(8,"8");
+        tree.put(4,"4");
+        tree.put(5,"5");
+        tree.put(8,"8");
 
         //when
         var res = tree.ceilingKey(5);
@@ -287,9 +288,9 @@ public class RedBlackTreeTest {
     @Test
     void ceilingKeyShouldReturnBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys(){
         //given
-        tree.add(4,"4");
-        tree.add(5,"5");
-        tree.add(8,"8");
+        tree.put(4,"4");
+        tree.put(5,"5");
+        tree.put(8,"8");
 
         //when
         var res = tree.ceilingKey(6);

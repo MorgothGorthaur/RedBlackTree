@@ -9,7 +9,7 @@ public class RedBlackTree<V> {
     }
 
     public Node <V> ceilingEntry(int key) {
-        var tree = headMap(key);
+        var tree = tailMap(key);
         if(tree.node != null){
             return tree.lastEntry();
         }
@@ -75,7 +75,7 @@ public class RedBlackTree<V> {
     public Node<V> pollFirst() {
         var first = getMaxNode(node);
         if (first != null) {
-            delete(first.key);
+            remove(first.key);
             return first;
         }
         return null;
@@ -84,7 +84,7 @@ public class RedBlackTree<V> {
     public Node<V> pollLast() {
         var last = getMinNode(node);
         if (last != null) {
-            delete(last.key);
+            remove(last.key);
             return last;
         }
         return null;
@@ -94,7 +94,7 @@ public class RedBlackTree<V> {
         this.node = node;
     }
 
-    public void add(int key, V value) {
+    public void put(int key, V value) {
         recursiveAdd(node, key, value);
     }
 
@@ -106,7 +106,7 @@ public class RedBlackTree<V> {
         return null;
     }
 
-    public V delete(int key) {
+    public V remove(int key) {
         var deleted = recursiveFind(node, key);
         if (deleted != null) {
             var value = deleted.value;
@@ -144,7 +144,7 @@ public class RedBlackTree<V> {
         var tree = tailMap(key);
         var keyNode = recursiveFind(node, key);
         if (!incl && keyNode != null) {
-            tree.delete(key);
+            tree.remove(key);
         }
         return tree;
     }
@@ -159,7 +159,7 @@ public class RedBlackTree<V> {
         var tree = headMap(key);
         var keyNode = recursiveFind(node, key);
         if (!incl && keyNode != null) {
-            tree.delete(key);
+            tree.remove(key);
         }
         return tree;
     }
@@ -169,13 +169,13 @@ public class RedBlackTree<V> {
         if (firstKey > secondKey) {
             var tree = new RedBlackTree<V>();
             tree.node = node;
-            tree = tree.tailMap(firstKey);
-            return tree.headMap(secondKey);
+            tree = tree.headMap(firstKey);
+            return tree.tailMap(secondKey);
         } else {
             var tree = new RedBlackTree<V>();
             tree.node = node;
-            tree = tree.tailMap(secondKey);
-            return tree.headMap(firstKey);
+            tree = tree.headMap(secondKey);
+            return tree.tailMap(firstKey);
         }
     }
 
@@ -184,10 +184,10 @@ public class RedBlackTree<V> {
         var firstKeyNode = recursiveFind(node,firstKey);
         var secondKeyNode = recursiveFind(node,secondKey);
         if (!lowIncl && firstKeyNode != null) {
-            tree.delete(firstKey);
+            tree.remove(firstKey);
         }
         if (!highIncl && secondKeyNode != null) {
-            tree.delete(secondKey);
+            tree.remove(secondKey);
         }
         return tree;
     }
@@ -414,24 +414,24 @@ public class RedBlackTree<V> {
 
     private void splitTail(Node<V> splitNode, int key, RedBlackTree<V> tree) {
         if (splitNode != null) {
-            if (splitNode.key <= key) {
-                tree.add(splitNode.key, splitNode.value);
-                splitTail(splitNode.rightChild, key, tree);
+            if (splitNode.key >= key) {
+                tree.put(splitNode.key, splitNode.value);
+                splitTail(splitNode.leftChild, key, tree);
 
             }
-            splitTail(splitNode.leftChild, key, tree);
-
+            splitTail(splitNode.rightChild, key, tree);
         }
     }
 
     private void splitHead(Node<V> splitNode, int key, RedBlackTree<V> tree) {
         if (splitNode != null) {
-            if (splitNode.key >= key) {
-                tree.add(splitNode.key, splitNode.value);
-                splitHead(splitNode.leftChild, key, tree);
+            if (splitNode.key <= key) {
+                tree.put(splitNode.key, splitNode.value);
+                splitHead(splitNode.rightChild, key, tree);
 
             }
-            splitHead(splitNode.rightChild, key, tree);
+            splitHead(splitNode.leftChild, key, tree);
+
         }
     }
 
