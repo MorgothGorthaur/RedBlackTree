@@ -1,11 +1,11 @@
 package redblacktree;
 
-class Node <V> {
+public class Node <V> {
     Node<V> parent;
     Node<V> leftChild;
     Node<V> rightChild;
-    int key;
-    V value;
+    public int key;
+    public V value;
     Color color;
 
     Node(int key, V value, Node<V> parent) {

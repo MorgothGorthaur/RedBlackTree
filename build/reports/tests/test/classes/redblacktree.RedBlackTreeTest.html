@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">14</div>
+<div class="counter">27</div>
 <p>tests</p>
 </div>
 </td>
@@ -35,13 +35,13 @@
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">0</div>
+<div class="counter">3</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.051s</div>
+<div class="counter">0.033s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,7 +50,7 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
+<div class="infoBox skipped" id="successRate">
 <div class="percent">100%</div>
 <p>successful</p>
 </div>
@@ -75,28 +75,68 @@
 </tr>
 </thead>
 <tr>
-<td class="success">deleteShouldReturnNull_ifNotFound()</td>
+<td class="success">ceilingEntryShouldReturnEntryWithBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">ceilingEntryShouldReturnEntryWithEqualKey_ifFound()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ceilingEntryShouldReturnNull_ifNotFound()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ceilingKeyShouldReturnBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ceilingKeyShouldReturnKeyWithEqualKey_ifFound()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ceilingKeyShouldReturnNull_ifNotFound()</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">deleteShouldReturnNull_ifNotFound()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">deleteShouldReturnValue_ifFound()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">firstEntryShouldReturnEntryWithMaxKey_ifTreeSizeMoreZero()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">firstEntryShouldReturnNull_ifTreeSizeIsZero()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">firstKeyShouldReturnMaxKeyValue_ifTreeSizeMoreZero()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">firstKeyShouldReturnNull_ifTreeSizeIsZero()</td>
-<td class="success">0.002s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getShouldReturnNull_ifNotFound()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -106,12 +146,22 @@
 </tr>
 <tr>
 <td class="success">headMapShouldReturnKeysMoreThenKey_ifFound()</td>
-<td class="success">0s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">headMapShouldReturnNull_ifKeyNotFound()</td>
-<td class="success">0.031s</td>
+<td class="skipped">headMapShouldReturnNull_ifKeyNotFound()</td>
+<td class="skipped">-</td>
+<td class="skipped">ignored</td>
+</tr>
+<tr>
+<td class="success">lastEntryShouldReturnEntryWithMinKey_ifTreeSizeMoreZero()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">lastEntryShouldReturnNull_ifTreeSizeIsZero()</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -121,17 +171,32 @@
 </tr>
 <tr>
 <td class="success">lastKeyShouldReturnNull_ifTreeSizeIsZero()</td>
-<td class="success">0.002s</td>
+<td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">subMapShouldReturnNull_ifKeysNotFound()</td>
-<td class="success">0.002s</td>
+<td class="success">pollFirstShouldReturnAndRemoveEntryWithMaxKey_ifTreeSizeMoreZero()</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">pollFirstShouldReturnNull_ifTreeSizeIsZero()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">pollLastShouldReturnAndRemoveEntryWithMinKey_ifTreeSizeMoreZero()</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="skipped">subMapShouldReturnNull_ifKeysNotFound()</td>
+<td class="skipped">-</td>
+<td class="skipped">ignored</td>
 </tr>
 <tr>
 <td class="success">subMapShouldReturnTreeMapWithKeysBetweenFirstKeyAndSecondKey()</td>
-<td class="success">0.001s</td>
+<td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -140,9 +205,9 @@
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">tailMapShouldReturnNull_ifKeyNotFound()</td>
-<td class="success">0.002s</td>
-<td class="success">passed</td>
+<td class="skipped">tailMapShouldReturnNull_ifKeyNotFound()</td>
+<td class="skipped">-</td>
+<td class="skipped">ignored</td>
 </tr>
 </table>
 </div>
@@ -154,7 +219,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at 9 сент. 2022 г., 23:17:52</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at 10 сент. 2022 г., 04:20:20</p>
 </div>
 </div>
 </body>

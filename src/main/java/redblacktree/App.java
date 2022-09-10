@@ -1,6 +1,5 @@
 package redblacktree;
 
-import java.util.TreeMap;
 
 public class App {
     public static void main(String[] args){
@@ -25,7 +24,7 @@ public class App {
 
         System.out.println(tree.toString());
         System.out.println(tree.getTreeHeigh());
-        System.out.println(tree.subMap(23, 10));
+        System.out.println(tree.headMap(23, true));
 //        tree.delete(5);
 //        tree.delete(15);
 //        tree.delete(11);
@@ -43,6 +42,5 @@ public class App {
 //        tree.delete(25);
    //     System.out.println(tree.headMap(16));
        System.out.println(tree.toString());
-
     }
 }
