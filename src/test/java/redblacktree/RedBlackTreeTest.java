@@ -159,7 +159,7 @@ public class RedBlackTreeTest {
         tree.put(17, "17");
         tree.put(19, "19");
         //when
-        var res = tree.subMap(14,16);
+        var res = tree.subMap(16,14);
         //then
         assertEquals(res.get(16), "16");
         assertEquals(res.get(15), "15");

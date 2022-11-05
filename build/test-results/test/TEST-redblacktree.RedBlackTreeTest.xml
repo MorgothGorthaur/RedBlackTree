@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="redblacktree.RedBlackTreeTest" tests="27" skipped="3" failures="0" errors="0" timestamp="2022-09-10T15:52:33" hostname="fedora" time="0.06">
+<testsuite name="redblacktree.RedBlackTreeTest" tests="27" skipped="3" failures="0" errors="0" timestamp="2022-11-05T19:03:37" hostname="fedora" time="0.149">
   <properties/>
-  <testcase name="headMapShouldReturnNull_ifKeyNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.0">
+  <testcase name="headMapShouldReturnNull_ifKeyNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.002">
     <skipped/>
   </testcase>
-  <testcase name="ceilingKeyShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.015"/>
-  <testcase name="lastKeyShouldReturnMinKeyValue_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.003"/>
-  <testcase name="lastKeyShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="pollFirstShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="tailMapShouldReturnNull_ifKeyNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.0">
+  <testcase name="ceilingKeyShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.037"/>
+  <testcase name="lastKeyShouldReturnMinKeyValue_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.007"/>
+  <testcase name="lastKeyShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="pollFirstShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="tailMapShouldReturnNull_ifKeyNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.001">
     <skipped/>
   </testcase>
-  <testcase name="pollFirstShouldReturnAndRemoveEntryWithMaxKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="ceilingEntryShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="pollLastShouldReturnAndRemoveEntryWithMinKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="firstEntryShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.0"/>
+  <testcase name="pollFirstShouldReturnAndRemoveEntryWithMaxKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="ceilingEntryShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="pollLastShouldReturnAndRemoveEntryWithMinKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="firstEntryShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
   <testcase name="subMapShouldReturnTreeMapWithKeysBetweenFirstKeyAndSecondKey()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="firstKeyShouldReturnMaxKeyValue_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="ceilingEntryShouldReturnEntryWithEqualKey_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
+  <testcase name="firstKeyShouldReturnMaxKeyValue_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="ceilingEntryShouldReturnEntryWithEqualKey_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
   <testcase name="firstEntryShouldReturnEntryWithMaxKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="ceilingKeyShouldReturnBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
-  <testcase name="getShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="deleteShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
+  <testcase name="ceilingKeyShouldReturnBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()" classname="redblacktree.RedBlackTreeTest" time="0.003"/>
+  <testcase name="getShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.003"/>
+  <testcase name="deleteShouldReturnNull_ifNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.003"/>
   <testcase name="subMapShouldReturnNull_ifKeysNotFound()" classname="redblacktree.RedBlackTreeTest" time="0.0">
     <skipped/>
   </testcase>
-  <testcase name="firstKeyShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="getShouldReturnValue_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="lastEntryShouldReturnEntryWithMinKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="lastEntryShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
+  <testcase name="firstKeyShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="getShouldReturnValue_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="lastEntryShouldReturnEntryWithMinKey_ifTreeSizeMoreZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="lastEntryShouldReturnNull_ifTreeSizeIsZero()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
   <testcase name="ceilingKeyShouldReturnKeyWithEqualKey_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="deleteShouldReturnValue_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="ceilingEntryShouldReturnEntryWithBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="headMapShouldReturnKeysMoreThenKey_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
-  <testcase name="tailMapShouldReturnNewTreeWithKeysLessThenKey_ifKeyFound()" classname="redblacktree.RedBlackTreeTest" time="0.001"/>
+  <testcase name="deleteShouldReturnValue_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="ceilingEntryShouldReturnEntryWithBiggerKey_ifKeyNotFoundButTreeContainsBiggerKeys()" classname="redblacktree.RedBlackTreeTest" time="0.003"/>
+  <testcase name="headMapShouldReturnKeysMoreThenKey_ifFound()" classname="redblacktree.RedBlackTreeTest" time="0.002"/>
+  <testcase name="tailMapShouldReturnNewTreeWithKeysLessThenKey_ifKeyFound()" classname="redblacktree.RedBlackTreeTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
