@@ -6,5 +6,5 @@ target/
 .gradle
 build/
 gradle/
-gradleview
+gradlew
 gradleview.bat
